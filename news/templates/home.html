@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <ul class="header-links">
+            <li><a href="{% url 'home-page' %}">Home</a></li>
+        </ul>
+    </header>
+
+    <h1>Página Inicial</h1>
+
+    <section>
+        {% for news in news_list %}
+        <div class="news-card">
+            <h2 class="news-title">{{ news.title }}</h2>
+            <span class="news-date">{{ news.created_at|date:"d/m/Y" }}</span>
+            <p>{{ news.content }}</p>
+            {% if news.image %}
+            <img src="{% static news.image.url %}" alt="Imagem da notícia de {{ news.title }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+</body>
+</html>
